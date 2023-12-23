@@ -12,7 +12,7 @@ function authenticateJWT(req, res, next) {
     req.user = payload; // create a current user
     return next();
   } catch (err) {
-    return next();
+    return next(err);
   }
 }
 
@@ -36,7 +36,6 @@ function ensureCorrectUser(req, res, next) {
       return next({ status: 401, message: "Unauthorized" });
     }
   } catch (err) {
-    // errors would happen here if we made a request and req.user is undefined
     return next({ status: 401, message: "Unauthorized" });
   }
 }
